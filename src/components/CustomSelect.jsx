@@ -20,4 +20,26 @@ export const CustomSelect = styled(Select).attrs({
             backgroundColor: state.isSelected ? 'var(--colors-bg)' : 'var(--colors-ui-base)'
         })
     }
-})``;
+})`
+    width: 200px;
+    border-radius: var(--radii);
+    font-family: var(--family);
+    border: none;
+
+    & > * {
+        box-shadow: var(--shadow);
+    }
+
+    & input {
+        padding-left: 0.25rem;
+    }
+
+    & * {
+        font-family: var(--family) !important;
+        color: var(--colors-text) !important;
+    }
+
+    & > div[id]:last-child {
+        background-color: var(--colors-ui-base);
+    }
+`;
