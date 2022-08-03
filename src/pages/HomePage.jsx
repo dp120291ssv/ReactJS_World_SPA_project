@@ -1,22 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useHistory} from "react-router-dom";
+
 import Controls from "../components/Controls";
 import List from "../components/List";
 import Card from "../components/Card";
-import {ALL_COUNTRIES} from "../config";
 
-export const HomePage = () => {
-    const [countries, setCountries] = useState([]);
+
+export const HomePage = ({countries}) => {
+    const {push} = useHistory();
+    const [filteredCountries, setFilteredCountries] = useState(countries)
+
+    const handleSearch = useCallback((search, region) => {
+        let data = [...countries]
+
+        if (region) {
+            data = data.filter(country => country.region.includes(region))
+        }
+
+        if (search) {
+            data = data.filter(country => country.name.toLowerCase().includes(search.toLowerCase()))
+        }
+
+        setFilteredCountries(data);
+    },[countries])
 
     useEffect(() => {
-        axios.get(ALL_COUNTRIES).then(
-            ({data}) => setCountries(data))
-    }, [])
+        handleSearch();
+    }, [countries]);
+
     return (
         <>
-            <Controls/>
+            <Controls onSearch={handleSearch}/>
             <List>
-                {countries.map(country => {
+                {filteredCountries.map(country => {
                     const countryInfo = {
                         img: country.flags.png,
                         name: country.name,
@@ -35,9 +51,7 @@ export const HomePage = () => {
                             }
                         ]
                     }
-                    return (
-                        <Card key={country.name} {...countryInfo} />
-                    )
+                    return <Card key={country.name} onClick={() => push(`/country/${country.name}`)} {...countryInfo} />
                 })}
             </List>
         </>

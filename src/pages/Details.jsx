@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Details = () => {
+export const Details = ({match}) => {
     return (
         <div>
-            Test
+            Country: {match.params.name}
         </div>
     );
 };

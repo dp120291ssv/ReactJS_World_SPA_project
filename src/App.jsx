@@ -4,10 +4,18 @@ import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
 import { Details } from './pages/Details';
 import { Switch, Route } from 'react-router-dom';
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import axios from "axios";
+import {ALL_COUNTRIES} from "./config";
 
 function App() {
     const [countries, setCountries] = useState([]);
+
+    useEffect(() => {
+        if (!countries.length)
+            axios.get(ALL_COUNTRIES).then(
+                ({data}) => setCountries(data))
+    }, [])
 
     return (
         <>
