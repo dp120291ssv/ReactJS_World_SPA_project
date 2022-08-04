@@ -62,7 +62,7 @@ const Header = () => {
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme)
+        // localStorage.setItem('theme', theme)
     }, [theme])
 
     return (
