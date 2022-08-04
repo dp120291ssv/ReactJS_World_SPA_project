@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import {IoMoon, IoMoonOutline} from "react-icons/io5";
 import {Container} from './Container';
@@ -28,6 +28,8 @@ const Title = styled(Link).attrs({
 `;
 
 const ModeSwitcher = styled.div`
+    display: flex;
+    align-items: center;
     color: var(--colors-text);
     font-size: var(--fs-sm);
     cursor: pointer;
@@ -40,7 +42,7 @@ const SideB = styled.div`
 `;
 
 const TitleText = styled.span`
-    margin-left: 0.75rem;
+    margin-left: 8px;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari/Opera */
     -moz-user-select: none; /* Firefox */
@@ -50,12 +52,17 @@ const TitleText = styled.span`
 const Header = () => {
     const {t, i18n} = useTranslation();
     const [theme, setTheme] = useState('light')
-    const changeLanguage = (language) => i18n.changeLanguage(language);
+
+    const handleChangeLng = (lng) => {
+        i18n.changeLanguage(lng);
+        localStorage.setItem("lang", lng);
+    };
 
     const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light')
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme)
     }, [theme])
 
     return (
@@ -63,7 +70,7 @@ const Header = () => {
             <Container>
                 <Wrapper>
                     <Title>
-                        {t('title')}
+                        {t("MODULE_TITLE")}
                     </Title>
                     <SideB>
                         <ModeSwitcher onClick={toggleTheme}>
@@ -75,8 +82,8 @@ const Header = () => {
                             <TitleText>{theme} Theme</TitleText>
                         </ModeSwitcher>
                         <div>
-                            <button onClick={() => changeLanguage("en")}>EN</button>
-                            <button onClick={() => changeLanguage("es")}>ES</button>
+                            <button onClick={() => handleChangeLng("en")}>EN</button>
+                            <button onClick={() => handleChangeLng("es")}>ES</button>
                         </div>
                     </SideB>
                 </Wrapper>

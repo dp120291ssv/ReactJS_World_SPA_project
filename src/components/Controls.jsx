@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Search from './Search'
 import {CustomSelect} from "./CustomSelect";
 import styled from 'styled-components';
+import {useTranslation} from "react-i18next";
 
 const options = [
     {value: 'Africa', label: 'Africa'},
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
 const Controls = ({onSearch}) => {
     const [search, setSearch] = useState('');
     const [region, setRegion] = useState('');
+    const { t } = useTranslation();
 
     useEffect(() => {
         onSearch(search, region?.value);
@@ -36,7 +38,7 @@ const Controls = ({onSearch}) => {
             <Search search={search} setSearch={setSearch}/>
             <CustomSelect
                 options={options}
-                placeholder="Filter by Region"
+                placeholder={t("FILTER_PLACEHOLDER")}
                 isClearable
                 isSearchable={false}
                 value={region}

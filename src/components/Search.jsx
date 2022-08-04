@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {IoSearch} from 'react-icons/io5';
+import {useTranslation} from "react-i18next";
 
 const InputContainer = styled.label`
     background-color: var(--colors-ui-base);
@@ -20,8 +21,7 @@ const InputContainer = styled.label`
 `;
 
 const Input = styled.input.attrs({
-    type: 'search',
-    placeholder: 'Search for country...'
+    type: 'search'
 })`
     margin-left: 2rem;
     border: none;
@@ -31,10 +31,12 @@ const Input = styled.input.attrs({
 `;
 
 const Search = ({search, setSearch}) => {
+    const { t } = useTranslation();
+
     return (
         <InputContainer>
             <IoSearch />
-            <Input onChange={(e) => setSearch(e.target.value)} value={search}/>
+            <Input placeholder={t("SEARCH_INPUT_PLACEHOLDER")} onChange={(e) => setSearch(e.target.value)} value={search}/>
         </InputContainer>
     );
 };
