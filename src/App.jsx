@@ -1,11 +1,12 @@
+import { Switch, Route } from 'react-router-dom';
+import {useState, useEffect} from "react";
+import axios from "axios";
+
 import Header from './components/Header';
 import Main from './components/Main';
 import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
 import { Details } from './pages/Details';
-import { Switch, Route } from 'react-router-dom';
-import {useState, useEffect} from "react";
-import axios from "axios";
 import {ALL_COUNTRIES} from "./config";
 
 function App() {
