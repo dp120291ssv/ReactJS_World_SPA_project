@@ -1,68 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
-import {Link} from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-
 import {IoMoon, IoMoonOutline} from "react-icons/io5";
 import {Container} from '../Container/Container';
-
-const HeaderEl = styled.header`
-    box-shadow: var(--shadow);
-    background-color: var(--colors-ui-base);
-`;
-
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 0;
-`;
-
-const Title = styled(Link).attrs({
-    to: '/'
-})`
-    color: var(--colors-text);
-    font-size: var(--fs-sm);
-    text-decoration: none;
-    font-weight: var(--fw-bold);
-`;
-
-const ModeSwitcher = styled.div`
-    display: flex;
-    align-items: center;
-    color: var(--colors-text);
-    font-size: var(--fs-sm);
-    cursor: pointer;
-    text-transform: capitalize;
-    margin-right: 20px;
-`;
-
-const SideB = styled.div`
-    display: flex;
-`;
-
-const TitleText = styled.span`
-    margin-left: 8px;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Chrome/Safari/Opera */
-    -moz-user-select: none; /* Firefox */
-    user-select: none;
-`;
+import {HeaderEl} from "./HeaderElement";
+import {Wrapper} from "./Wrapper";
+import {Title} from "./Title/Title";
+import {SideB} from "./SideB";
+import {ModeSwitcher} from "./ModeSwitcher";
+import {TitleText} from "./Title/TitleText";
 
 const Header = () => {
     const {t, i18n} = useTranslation();
-    const [theme, setTheme] = useState('light')
+    const themFromStorage = localStorage.getItem('theme');
+    const [theme, setTheme] = useState(themFromStorage ? themFromStorage :  'light')
 
     const handleChangeLng = (lng) => {
         i18n.changeLanguage(lng);
         localStorage.setItem("lang", lng);
     };
 
-    const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light')
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light')
+    }
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);
-        // localStorage.setItem('theme', theme)
+        localStorage.setItem('theme', theme)
     }, [theme])
 
     return (
