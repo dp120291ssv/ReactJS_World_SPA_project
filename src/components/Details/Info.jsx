@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Meta, Tag, TagsGroup} from "./Details/Meta";
+import {Meta, Tag, TagsGroup} from "./Meta";
 import axios from "axios";
-import {filterByCode} from "../config";
+import {filterByCode} from "../../config";
 
 export const Wrapper = styled.section`
     margin-top: 3rem;

@@ -3,8 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
 
-import Header from './components/Header';
-import Main from './components/Main';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
 import { Details } from './pages/Details';

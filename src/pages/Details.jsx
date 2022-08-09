@@ -3,8 +3,8 @@ import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
 import {IoArrowBack} from "react-icons/io5";
 import {searchByCountry} from "../config";
-import Info from "../components/Info";
-import {Button} from "../components/Button";
+import Info from "../components/Details/Info";
+import {Button} from "../components/Button/Button";
 
 export const Details = () => {
     const {name} = useParams();

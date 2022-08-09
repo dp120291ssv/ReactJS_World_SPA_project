@@ -1,9 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
-
-import Controls from "../components/Controls";
-import List from "../components/List";
-import Card from "../components/Card";
+import Controls from "../components/Controls/Controls";
+import Card from "../components/Card/Card";
+import Content from "../components/Content/Content";
 
 
 export const HomePage = ({countries}) => {
@@ -31,7 +30,7 @@ export const HomePage = ({countries}) => {
     return (
         <>
             <Controls onSearch={handleSearch}/>
-            <List>
+            <Content>
                 {filteredCountries.map(country => {
                     const countryInfo = {
                         img: country.flags.png,
@@ -53,7 +52,7 @@ export const HomePage = ({countries}) => {
                     }
                     return <Card key={country.name} onClick={() => push(`/country/${country.name}`)} {...countryInfo} />
                 })}
-            </List>
+            </Content>
         </>
     );
 };
